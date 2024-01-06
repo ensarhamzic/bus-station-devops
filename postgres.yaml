@@ -25,11 +25,11 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: bus-station-storage
-
+              
       volumes:
         - name: bus-station-storage
           hostPath:
-            path: /mnt/bus-station-storage
+            path: /mnt/bus-station
             type: DirectoryOrCreate
 ---
 apiVersion: v1

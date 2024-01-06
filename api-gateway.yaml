@@ -21,6 +21,8 @@ spec:
           env:
             - name: Urls__UsersManagement
               value: "http://user-management-service:8080/api"
+            - name: Urls__RoutesManagement
+              value: "http://route-management-service:8080/api"
 ---
 apiVersion: v1
 kind: Service

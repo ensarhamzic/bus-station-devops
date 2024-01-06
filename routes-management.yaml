@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: route-management-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: route-management
+  template:
+    metadata:
+      labels:
+        app: route-management
+    spec:
+      containers:
+        - name: route-management
+          image: routesmanagement:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              value: "Host=postgres-service;Port=5432;Database=bus_station_routes;Username=admin;Password=admin;"
+            - name: MessageBroker__HostName
+              value: "rabbitmq-service"
+            - name: MessageBroker__Port
+              value: "5672"
+            - name: MessageBroker__UserName
+              value: "admin"
+            - name: MessageBroker__Password
+              value: "admin"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: route-management-service
+spec:
+  selector:
+    app: route-management
+  ports:
+    - protocol: TCP
+      port: 8080
