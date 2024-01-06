@@ -21,25 +21,14 @@ spec:
           env:
             - name: ConnectionStrings__DefaultConnection
               value: "Host=postgres-service;Port=5432;Database=bus_station_users;Username=admin;Password=admin;"
-          # command:
-          #   - "/bin/sh"
-          #   - "-c"
-          # args:
-          #   - |
-          #     until dotnet ef database update -c UserManagement.Data.UserDbContext; do
-          #       echo "Retrying database migration..."
-          #       sleep 5
-          #     done
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: user-management-service
 spec:
-  type: LoadBalancer
   selector:
     app: user-management
   ports:
     - protocol: TCP
       port: 8080
-      targetPort: 8080
