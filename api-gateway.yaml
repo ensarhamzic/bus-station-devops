@@ -24,7 +24,7 @@ spec:
             - name: Urls__RoutesManagement
               value: "http://route-management-service:8080/api"
             - name: Urls__TicketsManagement
-              value: "http://tickets-management-service:8080"
+              value: "http://ticket-management-service:8080"
       initContainers:
         - name: check-user-management-service
           image: busybox:1.36.1
