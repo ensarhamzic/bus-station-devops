@@ -23,6 +23,8 @@ spec:
               value: "http://user-management-service:8080/api"
             - name: Urls__RoutesManagement
               value: "http://route-management-service:8080/api"
+            - name: Urls__TicketsManagement
+              value: "http://tickets-management-service:8080"
       initContainers:
         - name: check-user-management-service
           image: busybox:1.36.1
@@ -30,6 +32,9 @@ spec:
         - name: check-route-management-service
           image: busybox:1.36.1
           command: ['sh', '-c', 'until wget -qO- http://route-management-service:8080/healthz; do echo waiting for route-management-service; sleep 2; done;']
+        - name: check-ticket-management-service
+          image: busybox:1.36.1
+          command: ['sh', '-c', 'until wget -qO- http://ticket-management-service:8080/healthz; do echo waiting for ticket-management-service; sleep 2; done;']
 ---
 apiVersion: v1
 kind: Service
