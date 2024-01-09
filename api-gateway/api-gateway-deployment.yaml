@@ -24,7 +24,7 @@ spec:
             - name: Urls__RoutesManagement
               value: "http://route-management-service:8080/api"
             - name: Urls__TicketsManagement
-              value: "http://ticket-management-service:8080"
+              value: "http://ticket-management-service:8080/api"
           resources:
             limits:
               cpu: "1"
