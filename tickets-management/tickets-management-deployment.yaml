@@ -25,6 +25,13 @@ spec:
               value: "mongodb://mongodb-service:27017"
             - name: RABBITMQ_CONNECTION_STRING
               value: "amqp://admin:admin@rabbitmq-service:5672/"
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "0.5"
+              memory: "500Mi"
       initContainers:
         - name: check-mongodb
           image: busybox:1.36.1
@@ -32,14 +39,4 @@ spec:
         - name: check-rabbitmq
           image: busybox:1.36.1
           command: ['sh', '-c', 'until nc -z -v -w30 rabbitmq-service 5672; do echo waiting for rabbitmq-service; sleep 2; done;']
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ticket-management-service
-spec:
-  selector:
-    app: ticket-management
-  ports:
-    - protocol: TCP
-      port: 8080
+

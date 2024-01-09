@@ -26,28 +26,15 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/rabbitmq/mnesia
               name: rabbitmq-storage
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "0.5"
+              memory: "500Mi"
 
       volumes:
         - name: rabbitmq-storage
-          hostPath:
-            path: /storage/rabbitmq
-            type: DirectoryOrCreate
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rabbitmq-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: rabbitmq
-  ports:
-    - protocol: TCP
-      name: rabbitmq
-      port: 5672
-      targetPort: 5672
-    - protocol: TCP
-      name: rabbitmq-management
-      port: 15672
-      targetPort: 15672
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc

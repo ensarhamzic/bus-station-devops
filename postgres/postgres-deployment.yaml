@@ -25,20 +25,14 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: bus-station-storage
-              
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "0.5"
+              memory: "500Mi"
       volumes:
         - name: bus-station-storage
-          hostPath:
-            path: /mnt/bus-station
-            type: DirectoryOrCreate
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-service
-spec:
-  selector:
-    app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432
+          persistentVolumeClaim:
+            claimName: bus-station-pvc
