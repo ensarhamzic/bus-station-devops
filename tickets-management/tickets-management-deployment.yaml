@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
         - name: ticket-management
-          image: busstationgo:latest
-          imagePullPolicy: Never
+          image: ensarhamzic/bs-ticket-management:latest
           ports:
             - containerPort: 8080
           env:

@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
         - name: user-management
-          image: usermanagement:latest
-          imagePullPolicy: Never
+          image: ensarhamzic/bs-user-management:latest
           ports:
             - containerPort: 8080
           env:
